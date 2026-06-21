@@ -1,43 +1,41 @@
-# Machine Learning From Scratch: Linear Regression
+# 📉 Salary Prediction using Linear Regression
 
-An implementation of a simple Linear Regression model built entirely from scratch using pure Python loops and formulas (no Scikit-Learn). The model uses Gradient Descent to optimize its parameters and is evaluated on a real-world Salary dataset.
-
-## 🚀 Project Overview
-The objective of this project is to demonstrate the underlying mechanics of supervised learning and gradient descent. By manually coding the derivatives and update loops, this project bridges the gap between theoretical calculus and working software.
-
-### Key Features
-* **Zero Dependencies:** Optimized parameters are calculated without ML libraries.
-* **Manual Gradient Descent:** Custom implementation of slope calculation and parameter updates.
-* **Data Visualization:** Built-in tracking of the best-fit regression line over raw data points.
+This project contains a pure, framework-free implementation of a simple Linear Regression model optimized via Gradient Descent. Built entirely using basic Python loops, math formulas, and fundamental logic, this project predicts worker salary based on their years of experience without relying on high-level libraries like Scikit-Learn for modeling.
 
 ---
 
-## 📊 Dataset
-The model is trained on a **Annual Salary vs. Years Of Experience** dataset sourced from Kaggle. 
-* **Features ($X$):** YearsExperience
-* **Target ($y$):** Salary
+## 🎯 Project Objective
+The goal is to model the linear relationship between a feature variable X (Years of Experience) and a continuous target variable y (Salary) by manually calculating the optimal slope (m) and intercept (b) that minimizes prediction error.
+
+The underlying mathematical model is:
+y = (m * x) + b
 
 ---
 
-## 🧠 Math & Algorithm Breakdown
+## 🛠️ The Mathematical Engine: Gradient Descent
+Instead of using a shortcut, this implementation iteratively updates parameters using partial derivatives of the Mean Squared Error (MSE) loss function to find the global minimum.
 
-The model fits a straight line to the data using the equation:
-$$\hat{y} = mx + b$$
+For each iteration (epoch) over a dataset of size n, the gradients are computed manually inside a loop using these partial derivatives:
 
-### Gradient Descent Optimization
-To minimize the Mean Squared Error (MSE), the parameters $m$ (slope) and $b$ (intercept) are iteratively updated using partial derivatives:
+* **Slope Gradient (m_gradient):** += -(2/n) * x * (y - m_now * x - b_now)
+* **Intercept Gradient (b_gradient):** += -(2/n) * (y - m_now * x - b_now)
 
-$$\frac{\partial J}{\partial m} = -\frac{2}{n} \sum_{i=1}^{n} x_i (y_i - \hat{y}_i)$$
-$$\frac{\partial J}{\partial b} = -\frac{2}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)$$
-
-Every epoch, the weights shift against the gradient scaled by the learning rate ($L$):
-* $m = m - L \cdot \frac{\partial J}{\partial m}$
-* $b = b - L \cdot \frac{\partial J}{\partial b}$
+### Hyperparameters Configured:
+* **Learning Rate (L):** 0.0001 (Controls the step size taken down the error gradient)
+* **Epochs:** 10,000 (The number of complete mathematical passes through the dataset)
 
 ---
 
-## 💻 How to Run the Code
+## 📊 Dataset & Architecture Overview
 
-1. Clone this repository:
-   ```bash
-   git clone [https://github.com/ramiyer-0/Machine-Learning-Portfolio.git](https://github.com/ramiyer-0/Machine-Learning-Portfolio.git)
+The dataset consists of 30 records tracking professional experience relative to compensation structure. 
+
+### Data Snippet:
+```text
+    YearsExperience    Salary
+0               1.2   39344.0
+1               1.4   46206.0
+2               1.6   37732.0
+...
+28             10.4  122392.0
+29             10.6  121873.0
